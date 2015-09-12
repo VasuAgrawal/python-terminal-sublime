@@ -55,7 +55,8 @@ python_terminal__sublime_build = """\
 bat_name = "python_terminal.bat"
 python_terminal__bat = """\
 @echo off
-start cmd /k python3 -i %1
+start py.exe -3 -i %1
+exit
 """
 # Used on linux
 shell_name = "python_terminal.sh"
