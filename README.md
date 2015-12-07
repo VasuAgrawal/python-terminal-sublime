@@ -7,7 +7,7 @@ This is an installation script which adds two build systems to let you run pytho
 2. Install Python 3, and configure your path to be able to run python 3 from a terminal. Ensure that the py launcher is configured properly, such that running `py -2` spawns a python2 shell, and `py -3` spawns a python3 shell.
 
 ##Installation
-From a terminal, run the following:
+From a terminal, run the following (after navigating to the proper directory):
 
 ```bash
 python3 python_terminal_installer.py
