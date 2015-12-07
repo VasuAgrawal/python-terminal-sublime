@@ -36,6 +36,7 @@ from sys import platform as _platform
 
 # Used on all 3 operating systems
 build_name = "python_terminal.sublime-build"
+build_name_2 = "python_terminal_2.sublime-build"
 python_terminal__sublime_build = """\
 {
     "selector": "source.python",
@@ -56,6 +57,12 @@ bat_name = "python_terminal.bat"
 python_terminal__bat = """\
 @echo off
 start py.exe -3 -i %1
+exit
+"""
+bat_name_2 = "python_terminal_2.bat"
+python_terminal_2__bat = """\
+@echo off
+start py.exe -2 -i %1
 exit
 """
 # Used on linux
@@ -160,7 +167,7 @@ and that you have opened it at least once:
 def install():
     print("Beginning install ...")
     sublime_home = find_sublime(os.path.expanduser("~"))
-    if sublime_home == None:
+    if sublime_home is None:
         return
 
     if _platform == "linux" or _platform == "linux2":
@@ -215,6 +222,7 @@ def install():
 
     elif _platform == "win32":
         print("Installing for Windows ...")
+        # Python 3 installer
         bat_path = os.path.join(sublime_home, bat_name)
         bat_path_escaped = bat_path.replace(os.sep, os.sep + os.sep)
         bat_text = python_terminal__bat
@@ -224,6 +232,23 @@ def install():
             out.close()
 
         build_path = os.path.join(sublime_home, build_name)
+        build_path_escaped = build_path.replace(os.sep, os.sep + os.sep)
+        build_text = python_terminal__sublime_build % ("", "", bat_path_escaped)
+
+        with open(build_path_escaped, "w") as out:
+            out.write(build_text)
+            out.close()
+
+        # Python 2 installer
+        bat_path = os.path.join(sublime_home, bat_name_2)
+        bat_path_escaped = bat_path.replace(os.sep, os.sep + os.sep)
+        bat_text = python_terminal_2__bat
+
+        with open(bat_path_escaped, "w") as out:
+            out.write(bat_text)
+            out.close()
+
+        build_path = os.path.join(sublime_home, build_name_2)
         build_path_escaped = build_path.replace(os.sep, os.sep + os.sep)
         build_text = python_terminal__sublime_build % ("", "", bat_path_escaped)
 
